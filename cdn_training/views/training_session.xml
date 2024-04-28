@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <!-- training.session tree view -->
+        <record id="training_session_view_tree" model="ir.ui.view">
+            <field name="name">training.session.view.tree</field>
+            <field name="model">training.session</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="course_id"/>
+                    <field name="duration"/>
+                    <field name="seats"/>
+                    <field name="instruktur_id"/>
+                    <field name="no_hp"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- training.session form view -->
+        <record id="training_session_view_form" model="ir.ui.view">
+            <field name="name">training.session.view.form</field>
+            <field name="model">training.session</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button string="Konfirmasi" states="draf" name="action_confirm" type="object"/>
+                        <button string="Selesai" states="progress" name="action_done" type="object"/>
+                        <button string="Set Draf" states="progress" name="action_draf" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draf,progress,done" groups="cdn_training.group_training_admin"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" text="Selesai" bg_color="bg-info" attrs="{'invisible':[('state','!=','done')]}" groups="cdn_training.group_training_admin"/>
+                        <group>
+                            <!-- Add your fields here -->
+                            <group>
+                                <field name="name" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="start_date" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="duration" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                            </group>
+                            <group>
+                                <field name="seats" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="course_id" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="instruktur_id" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                            </group>                            
+                        </group>
+                        <group name="indetitas_instruktur" string="identitas Instruktur">
+                            <group>
+                                <field name="alamat" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="no_hp" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                            </group>
+                            <group>
+                                 <field name="email" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="jenis_kel" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                            </group>                                
+                        </group>
+                        <group>
+                            <field name="jml_peserta"/>
+                        </group>
+                        <notebook>
+                            <page string="Daftar Peserta">
+                                <field name="peserta_ids" attrs="{'readonly':[('state','=','done')]}" groups="cdn_training.group_training_admin">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="jenis_kel"/>
+                                        <field name="mobile"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- training.session action window -->
+        <record id="training_session_action" model="ir.actions.act_window">
+            <field name="name">Sesi Training</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">training.session</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p><p>
+                    <!-- More details about what a user can do with this object will be OK --> 
+                
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="traning_menu_act" name="Data Sesi Training" parent="training_menu_categ" action="training_session_action" sequence="10"/>
+    
+    </data>
+    
+</odoo>
