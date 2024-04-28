@@ -1,0 +1,2 @@
+# addons
+training odoo cendana
