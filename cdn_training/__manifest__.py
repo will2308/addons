@@ -26,6 +26,7 @@
         'security/groups.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
+        'data/sequence_data.xml',
         'views/menu_training.xml',
         'views/training_course.xml',
         'views/instruktur.xml',

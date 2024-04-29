@@ -29,7 +29,7 @@ class TrainingSession(models.Model):
     email = fields.Char(related='instruktur_id.email')
     jenis_kel = fields.Selection(related='instruktur_id.jenis_kel')
     peserta_ids = fields.Many2many('peserta', string='Peserta')
-    jml_peserta = fields.Char(compute='_compute_jml_peserta', string='Jumlah Peserta')
+    jml_peserta = fields.Integer(compute='_compute_jml_peserta', string='Jumlah Peserta')
     state = fields.Selection(string='Status', selection=[('draf', 'Draf'), ('progress', 'Sedang Berlangsung'),('done', 'Selesai')], default="draf")
     
     
