@@ -41,6 +41,7 @@
                                 <field name="name" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
                                 <field name="start_date" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
                                 <field name="duration" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>
+                                <field name="end_date" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin" readonly="1"/>
                             </group>
                             <group>
                                 <field name="seats" attrs="{'readonly':[('state','!=','draf')]}" groups="cdn_training.group_training_admin"/>

@@ -107,13 +107,14 @@
                                     </h4>
                                     <ul>
                                         <li>
-                                            <span class="text-muted">Tanggal Lahir</span> <field name="tgl_lahir"/>
+                                            <!-- <span class="text-muted">Tanggal Lahir</span> <field name="tgl_lahir"/> -->
+                                            <span class="text-muted">TTL : </span> <field name="tmp_lahir"/>, <field name="tgl_lahir"/>
                                         </li>
                                         <li>
-                                            <span class="text-muted">Jenis kelamin</span> <field name="jenis_kel"/>
+                                            <span class="text-muted">Jenis kelamin : </span> <field name="jenis_kel"/>
                                         </li>
                                         <li>
-                                            <span class="text-muted">No Hp</span> <field name="mobile"/>
+                                            <span class="text-muted">No Hp : </span> <field name="mobile"/>
                                         </li>
                                     </ul>
                                 </div>

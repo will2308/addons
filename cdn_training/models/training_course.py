@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from datetime import timedelta
 
 class TrainingCourse(models.Model):
     _name = 'training.course'
@@ -31,12 +32,19 @@ class TrainingSession(models.Model):
     peserta_ids = fields.Many2many('peserta', string='Peserta')
     jml_peserta = fields.Integer(compute='_compute_jml_peserta', string='Jumlah Peserta')
     state = fields.Selection(string='Status', selection=[('draf', 'Draf'), ('progress', 'Sedang Berlangsung'),('done', 'Selesai')], default="draf")
+    end_date = fields.Date(string='Tanggal Bearakhir', compute='_compute_end_date')
     
     
     @api.depends('peserta_ids')
     def _compute_jml_peserta(self):
         for rec in self:
             rec.jml_peserta = len(rec.peserta_ids)
+
+    @api.onchange('start_date','duration')
+    def _compute_end_date(self):
+        for rec in self:
+            cv_dur = timedelta(days=rec.duration)
+            self.end_date = self.start_date + cv_dur
 
     def action_confirm(self):
         self.state = 'progress'
@@ -46,6 +54,9 @@ class TrainingSession(models.Model):
 
     def action_draf(self):
         self.state = 'draf'
+
+    
+    
 
     
     

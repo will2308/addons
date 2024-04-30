@@ -16,7 +16,7 @@
     # for the full list
     'category': 'Hospital',
     'version': '16.0.1',
-    'sequence': 10,
+    'sequence': 1,
 
 
     # any module necessary for this one to work correctly
@@ -24,7 +24,9 @@
 
     # always loaded
     'data': [
-        # 'views/menu.xml',
+        'security/ir.model.access.csv',
+        'views/menu.xml',
+        'views/patient_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [],
