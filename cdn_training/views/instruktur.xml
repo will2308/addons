@@ -11,6 +11,7 @@
                 <tree>
                     <!-- Add your fields here -->
                     <field name="name"/>
+                    <field name="jabatan_id"/>
                     <field name="street"/>
                     <field name="city"/>
                     <field name="mobile"/>
@@ -25,12 +26,17 @@
             <field name="model">instruktur</field>
             <field name="arch" type="xml">
                 <form string="">
+                    <header>
+                        <button string="Update Jabatan" name="action_update_jabatan" type="object"/>
+                    </header>
                     <sheet>
                         <group string="Identitas">
                                 <group>
                                     <field name="name"/>
                                     <field name="street"/>
                                     <field name="city"/>
+                                    <field name="jenis_jabatan"/>
+                                    <field name="jabatan_id" attrs="{'invisible':[('jenis_jabatan','!=','staf')]}"/>
                                 </group>
                                 <group>
                                     <!-- Add your fields here -->
