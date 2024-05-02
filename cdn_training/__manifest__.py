@@ -38,10 +38,12 @@
         'views/peserta.xml',
         'wizards/training_wizard.xml',
         'views/jabatan.xml',
+        'wizards/jabatan_wizard.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
-    'application':True
+    'application':True,
+    'license': 'LGPL-3',
 }

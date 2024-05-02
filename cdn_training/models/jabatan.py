@@ -13,14 +13,4 @@ class jabatan(models.Model):
         ('staf', 'Staf'),
     ], string='Jenis Jabatan')
     pejabat_id = fields.Many2one('instruktur', string='nama pejabat')
-    # pejabat_ids = fields.One2many('instruktur', 'jabatan_id', string='pejabat')
-    
-    
-    # @api.constraints('jenis_jabatan')
-    # def _check_jabatan(self):
-    #     for rec in self:
-    #         if rec.jenis_jabatan == 'staf':
-    #             continue
-    #         existing_rec = self.search([('jenis_jabatan','=','kepala')])
-    #         if len(existing_rec) > 0:
-    #             raise ValidationError('Jabatan sudah terisi')
+   

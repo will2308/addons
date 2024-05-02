@@ -23,11 +23,12 @@ class Instruktur(models.Model):
             self.jabatan_id = self.env['jabatan'].search([('jenis_jabatan','=','wakil')])
 
     def action_update_jabatan(self):
-        verify_jabatan = self.env['jabatan'].search([('pejabat_id','=', 'null')])
-        if verify_jabatan == 'null':
-            self.jabatan_id.pejabat_id = self.id
-        else:
-            raise ValidationError('Jabatan sudah terisi')
+        # verify_jabatan = self.env['jabatan'].search([('id','=', self.jabatan_id)]).pejabat_id
+        # if verify_jabatan == "":
+        #     self.jabatan_id.pejabat_id = self.id
+        # else:
+        #     raise ValidationError('Jabatan sudah terisi')
+        self.jabatan_id.pejabat_id = self.id
         return True
 
 class Keahlian(models.Model):
