@@ -1,10 +1,68 @@
-import odoo from models, fields, api
-
-
+from odoo import models, fields, api
 
 class Appointment(models.Model):
-    _name = 'appointment'
+    _name = 'hospital.appointment'
     _description = 'Appointment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'ref'
 
-    patient_id = fields.Many2one('hospital.patient', string='Patient')    
+    patient_id = fields.Many2one('hospital.patient', string='Patient')
+    gender = fields.Selection(related="patient_id.gender")
+    appointment_time = fields.Datetime('Appointment Time', default=fields.Datetime.now)
+    booking_date = fields.Date('Booking date', default=fields.Date.context_today)
+    ref = fields.Char(string='Reference', tracking=True, help='Reference of the patient from ppatient record')
+    prescription = fields.Html(string='Prescription')
+    priority = fields.Selection([
+        ('0', 'Normal'),
+        ('1', 'Low'),
+        ('2', 'High'),
+        ('3', 'Very High'),
+    ], string='Priority')
+    state = fields.Selection([
+        ('draf', 'Draf'),
+        ('in_concultation', 'In Consultation'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ], default="draf", required=True, string='Status', tracking=True)
+    doctor_id = fields.Many2one('res.users', string='Doctor')
+    pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines', 'appointment_id', string='Pharmacy Lines')
+    hide_sales_price = fields.Boolean(string='Hide sales_Price')
+
+    @api.onchange('patient_id')
+    def _onchange_patient_id(self):
+        self.ref = self.patient_id.ref
+
+    def action_test(self):
+        print("success")
+        return{
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'Successfuly',
+                'type': 'rainbow_man',
+            }
+        }
+
+    def action_in_concultation(self):
+        for rec in self:
+            rec.state = 'in_concultation'
+
+    def action_done(self):
+        for rec in self:
+            rec.state = 'done'
+
+    def action_cancel(self):
+        for rec in self:
+            rec.state = 'cancel'
+
+    def action_draf(self):
+        for rec in self:
+            rec.state = 'draf'
+
+class AppointmentPharmacyLines(models.Model):
+    _name = 'appointment.pharmacy.lines'
+    _description = 'Appointment Pharmacy Lines'
+
+    product_id = fields.Many2one('product.product', required=True)
+    price_unit = fields.Float(related="product_id.lst_price")
+    qty = fields.Integer(string='Quantity', default=1)
+    appointment_id = fields.Many2one('hospital.appointment', string='appointment')

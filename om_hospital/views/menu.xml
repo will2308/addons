@@ -2,4 +2,6 @@
 <odoo>
     <menuitem id="menu_hospital_root" name="Hospital" sequence="0" web_icon="om_hospital,static/description/icon.png"/>
     <menuitem id="menu_patient_master" name="Patient Details" parent="menu_hospital_root" sequence="0"/>
+    <menuitem id="menu_appointment_master" name="appointments" parent="menu_hospital_root" sequence="20"/>
+    <menuitem id="menu_configuration" name="Configurations" parent="menu_hospital_root" sequence="30"/>
 </odoo>

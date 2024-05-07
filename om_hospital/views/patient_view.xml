@@ -22,14 +22,18 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="date_of_birth"/>
                             <field name="age"/>
                         </group>
                         <group>
                             <field name="ref"/>
                             <field name="gender"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="appointment_id"/>
                             <field name="active" invisible="1"/>
                         </group>
                     </group>
@@ -56,8 +60,8 @@
                 <field name="ref"/>
                 <filter name="filter_male" string="male" domain="[('gender', '=', 'male')]" />
                 <filter name="filter_female" string="female" domain="[('gender', '=', 'female')]" />
-                <separator />
-                <filter name="filter_kids" string="kids" domain="[('age', '&lt;=', 5)]" />
+                <!-- <separator />
+                <filter name="filter_kids" string="kids" domain="[('age', '&lt;=', 5)]" /> -->
                 <separator />
                 <filter name="filter_archived" string="archived" domain="[('active', '=', False)]" />
                 <group string="Group By">
@@ -86,6 +90,6 @@
         </field>
     </record>
 
-    <menuitem id="menu_patient" name="Patient" parent="menu_patient_master" action="action_hospital_patient" sequence="0"/>
+    <menuitem id="menu_patient" name="Patients" parent="menu_patient_master" action="action_hospital_patient" sequence="0"/>
 
 </odoo>
