@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- sale.order.inherit form view -->
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="priority">999</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- <form string="">
+                    <sheet>
+                        <group> -->
+                            <!-- Add your fields here -->
+                            <xpath expr="//field[@name='payment_term_id']" position="before">
+                                <field name="confirmed_user_id"/>
+                            </xpath>
+                        <!-- </group>
+                    </sheet>
+                </form> -->
+            </field>
+        </record>
+    </data>
+    
+</odoo>

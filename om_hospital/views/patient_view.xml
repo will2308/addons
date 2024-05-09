@@ -6,10 +6,11 @@
         <field name="name">hospital.patient.view.tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree multi_edit='True'>
                 <!-- Add your fields here -->
                 <field name="name" string="Patient Name"/>
                 <field name="age"/>
+                <field name="date_of_birth"/>
                 <field name="gender"/>
             </tree>
         </field>

@@ -5,7 +5,7 @@
         <field name="name">hospital.appointment.view.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'done'" decoration-warning="state == 'cancel'" decoration-info="state == 'in_concultation'" sample="1" multi_edit="1" >
+            <tree decoration-success="state == 'done'" decoration-warning="state == 'cancel'" multi_edit="1" >
                 <!-- Add your fields here -->
                 <field name="patient_id"/>
                 <field name="ref" optional="hide"/>
@@ -14,7 +14,7 @@
                 <field name="appointment_time"/>
                 <field name="activity_ids" widget="list_activity"/>
                 <field name="booking_date" optional="show"/>
-                <field name="state" decoration-success="state == 'done'" decoration-info="state == 'in_concultation'" decoration-warning="state == 'cancel'"  widget="badge" />
+                <field name="state" decoration-success="state == 'done'" decoration-info="state == 'in_concultation'" decoration-warning="state == 'cancel'" widget="badge" />
             </tree>
         </field>
     </record>
@@ -43,10 +43,11 @@
         <field name="arch" type="xml">
             <form string="">
                 <header>
-                    <button string="In concultation" name="action_in_concultation" type="object" class="oe_highlight" states="draf" data-hotkey="x"/>
+                    <button string="In concultation" name="action_in_concultation" type="object" class="oe_highlight" states="draf" data-hotkey="shift+x"/>
                     <button string="Mark As Done" name="action_done" type="object" class="oe_highlight" states="in_concultation" data-hotkey="v"/>
+                    <!-- <button string="Cancel" name="%(om_hospital.action_cancel_appointment)d" type="action" class="oe_highlight" states="draf,in_concultation" data-hotkey="z"/> -->
                     <button string="Cancel" name="action_cancel" type="object" class="oe_highlight" states="draf,in_concultation" data-hotkey="z"/>
-                    <button string="Reset to Draf" name="action_draf" type="object" class="oe_highlight" states="cancel" data-hotkey="r"/>
+                    <button string="Reset to Draf" name="action_draf" type="object" class="oe_highlight" states="cancel,done" data-hotkey="r"/>
                     <!-- options="{'clickable': '1'}" -->
                     <field name="state" widget="statusbar" statusbar_visible="draf,in_concultation,done" nolabel="1" />
                 </header>
