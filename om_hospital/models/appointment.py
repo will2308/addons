@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class Appointment(models.Model):
     _name = 'hospital.appointment'
@@ -6,7 +7,7 @@ class Appointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'ref'
 
-    patient_id = fields.Many2one('hospital.patient', string='Patient')
+    patient_id = fields.Many2one('hospital.patient', string='Patient', ondelete="cascade")
     gender = fields.Selection(related="patient_id.gender")
     appointment_time = fields.Datetime('Appointment Time', default=fields.Datetime.now)
     booking_date = fields.Date('Booking date', default=fields.Date.context_today)
@@ -28,6 +29,12 @@ class Appointment(models.Model):
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines', 'appointment_id', string='Pharmacy Lines')
     hide_sales_price = fields.Boolean(string='Hide sales_Price')
 
+    def unlink(self):
+        if self.state != 'draf':
+            raise ValidationError(_("you cannot delete appointment only in draf status"))
+        return super(HospitalAppointment. self).unlink()
+
+
     @api.onchange('patient_id')
     def _onchange_patient_id(self):
         self.ref = self.patient_id.ref
@@ -44,7 +51,8 @@ class Appointment(models.Model):
 
     def action_in_concultation(self):
         for rec in self:
-            rec.state = 'in_concultation'
+            if rec.state == "draf":
+                rec.state = 'in_concultation'
 
     def action_done(self):
         for rec in self:

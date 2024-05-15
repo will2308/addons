@@ -19,7 +19,7 @@
     'version': '16.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'product', 'purchase','l10n_id_efaktur'],
 
     # always loaded
     'data': [
@@ -39,6 +39,9 @@
         'wizards/training_wizard.xml',
         'views/jabatan.xml',
         'wizards/jabatan_wizard.xml',
+        'views/product_inherit.xml',
+        'views/purchase_order_inherit.xml',
+        'views/jenis_kelamin_inherit.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
