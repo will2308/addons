@@ -38,7 +38,7 @@ class HospitalPatient(models.Model):
     @api.constrains('date_of_birth')
     def _chek_date_of_birth(self):
         for rec in self:
-            if rec.date_of_birth and date_of_birth > fields.Date.today():
+            if rec.date_of_birth and rec.date_of_birth > fields.Date.today():
                 raise ValidationError('input not acceptable')
 
     @api.ondelete(at_uninstall=False)
@@ -75,7 +75,7 @@ class HospitalPatient(models.Model):
         return [('date_of_birth','>=', start_year),('date_of_birth','<=', end_year)] 
     
     def name_get(self):
-        patient_list = []
+        # patient_list = []
         # for record in self:
         #     name =  record.ref + ' - ' + record.name
         #     patient_list.append((record.id, name))

@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import datetime
+from dateutil import relativedelta
+from datetime import date
 
 class CancelAppointmentWizard(models.Model):
     _name = 'cancel.appointment.wizard'
@@ -9,7 +11,6 @@ class CancelAppointmentWizard(models.Model):
     @api.model
     def default_get(self, fields):
         res = super(CancelAppointmentWizard, self).default_get(fields)
-        # res['reason'] = "hello word"
         res['date_cancel'] = datetime.date.today()
         # print("........ context : ", self.env.context.get('active_id'))
         if self.env.context.get('active_id'):
@@ -21,7 +22,11 @@ class CancelAppointmentWizard(models.Model):
     date_cancel = fields.Date(string='Cancellation Date')    
 
     def action_cancel(self):
-        if self.appointment_id.booking_date == fields.Date.today():
-            raise ValidationError("Sorry, Cancellation is not allowed on the sameday of booking")
+        cancel_day = self.env['ir.config_parameter'].get_param('om_hospital.cancel_day')
+        allowed_date = self.appointment_id.booking_date - relativedelta.relativedelta(days=int(cancel_day))
+        if allowed_date < date.today():
+            raise ValidationError("Sorry, Cancellation is not allowed of this booking")
         self.appointment_id.state = 'cancel'
-        return
+       
+        # print("......cancel day :", cancel_day, "....alloewd_date", allowed_date, "...relativedelta : ", relativedelta.relativedelta(days=int(cancel_day)))
+        # print("********** config : ", self.env['ir.config_parameter'].get_param('om_hospital.cancel_day'))

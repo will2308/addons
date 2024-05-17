@@ -13,7 +13,7 @@
                     <div t-name="activity-box">
                         <img t-att-src="activity_image('hospital.patient','image',record.patient_id.raw_value)" t-att-title="record.patient_id.value"/>
                         <div>
-                            <field name="ref" display="full"/>
+                            <field name="ref"/>
                         </div>
                     </div>
                 </templates>
@@ -72,11 +72,12 @@
                     <group>
                         <group>
                             <!-- Add your fields here -->
-                            <field name="patient_id"/>
+                            <field name="patient_id" widget="selection"/>
                             <field name="gender"/>
                             <field name="doctor_id" widget="many2one_avatar"/>
-                            <field name="ref"/>
+                            <field name="ref" readonly="1" force_save="1"/>
                             <field name="booking_date" help="Date of booking" default_focus="1"/>
+                            <field name="operation_id" widget="many2one_tags"/>
                         </group>
                         <group>
                             <field name="hide_sales_price" />
