@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="profil_page" name="Profil Page">
+        <t t-call="website.layout">
+            <!-- Include the navbar -->
+            <t t-include="module_name.navbar" />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>User Profile</h1>
+                        <p>Informasi tentang profil pengguna akan ditampilkan di sini.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

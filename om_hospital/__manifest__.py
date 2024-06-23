@@ -36,6 +36,7 @@
         'views/patient_tag_view.xml',
         'views/operation_view.xml',
         'views/res_config_settings_views.xml',
+        'views/belajar_api.xml',
     ],
     # only loaded in demonstration mode
     'demo': [],

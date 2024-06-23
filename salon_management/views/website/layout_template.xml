@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="main_layout" name="Main Layout">
+        <!-- Navbar -->
+        <t t-include="module_name.navbar" />
+
+        <!-- Main Content -->
+        <div class="container">
+            <t t-slot="content"/>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">© 2024 My Website</span>
+            </div>
+        </footer>
+    </template>
+</odoo>

@@ -1,0 +1,33 @@
+<!-- custom_module/views/custom_module_views.xml -->
+
+<odoo>
+    <data>
+        <!-- Define a tree view to display candidates -->
+        <record id="view_candidate_tree" model="ir.ui.view">
+            <field name="name">candidate.tree</field>
+            <field name="model">hospital.candidate</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="year"/>
+                    <!-- Add other fields you want to display -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_sync_candidates" model="ir.actions.server">
+            <field name="name">Sync Candidates from API</field>
+            <field name="model_id" ref="model_hospital_candidate"/> <!-- Correct reference to model ID -->
+            <field name="state">code</field>
+            <field name="code">model.sync_candidates_from_api()</field>
+            <field name="condition">True</field>
+        </record>
+
+        <!-- Optional: Define a menu item to access the candidates -->
+        <menuitem id="menu_sync_candidates" name="Sync Candidates" parent="menu_hospital_root" sequence="80" action="action_sync_candidates"/> <!-- Corrected sequence value -->
+        <!-- <menuitem id="menu_view_candidates" name="Candidates" parent="menu_hospital_root" sequence="10"/> -->
+    </data>
+</odoo>
+            
